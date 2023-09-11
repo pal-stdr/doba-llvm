@@ -1,0 +1,238 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "build, run & remove active file with g++ for OPENCV",
+            "isBackground": false,
+            "linux": {
+                "command": "g++ -g ${file} -I${env:OPEN_CV_INCLUDE_PATH} -L${env:OPEN_CV_LIB_PATH} -lopencv_core -lopencv_imgcodecs -lopencv_highgui -o ${fileDirname}/${fileBasenameNoExtension} -std=gnu++2a && ${fileDirname}/${fileBasenameNoExtension} && rm ${fileDirname}/${fileBasenameNoExtension}"    
+                // "args": [
+                //     "-g",   // Debug mode
+                //     "${file}",   // Current active file while pressing Ctrl+Shift+B
+
+                //     "-I",
+                //     "${env:OPEN_CV_INCLUDE_PATH}",
+
+                //     "-L",
+                //     "${env:OPEN_CV_LIB_PATH} -lopencv_core -lopencv_imgcodecs -lopencv_highgui",     // # # For generic webcam, -L$(OPENCV_LIB) -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lopencv_imgproc -lopencv_video -lopencv_videoio
+
+                //     "-o",   // output file name
+                //     "${fileDirname}/${fileBasenameNoExtension}",
+                    
+                //     "-std=gnu++2a",      // For c++17 use -std=gnu++1z, for C++20 use ‘-std=c++2a’ or ‘-std=gnu++2a’
+                //     "-pthread"           // For threaded programming
+                //     // "-print-search-dirs"
+
+                // ]
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": false
+            // },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "build, run & remove active file with nvcc for OPENCV",
+            "isBackground": false,
+            "linux": {
+                "command": "/usr/local/cuda-11.2/bin/nvcc -std=c++17 -g ${file} -I${env:OPEN_CV_INCLUDE_PATH} -o ${fileDirname}/${fileBasenameNoExtension} && ${fileDirname}/${fileBasenameNoExtension} && rm ${fileDirname}/${fileBasenameNoExtension}"
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": false
+            // },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "build, run & remove active file with g++",
+            "isBackground": false,
+            "linux": {
+                "command": "g++ -g ${file} -o ${fileDirname}/${fileBasenameNoExtension} -std=gnu++2a && ${fileDirname}/${fileBasenameNoExtension} && rm ${fileDirname}/${fileBasenameNoExtension}"
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": false
+            // },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: g++ build active file",
+            "linux": {
+                "command": "/usr/bin/g++",
+                "args": [
+                    "-g",   // Debug mode
+                    "${file}",   // Current active file while pressing Ctrl+Shift+B
+
+                    "${workspaceFolder}/app/src/*.cpp", // collect all cpp files in /src dir
+                    "${workspaceFolder}/app/src/includes/*.{cpp,h}", // collect all cpp & header files in /src/includes dir
+
+                    "-o",   // output file name
+                    "${fileDirname}/${fileBasenameNoExtension}",
+                    
+                    "-std=gnu++2a",      // For c++17 use -std=gnu++1z, for C++20 use ‘-std=c++2a’ or ‘-std=gnu++2a’
+                    "-pthread"           // For threaded programming
+                    // "-print-search-dirs"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ],
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: g++ for matplotlib",
+            "linux": {
+                "command": "/usr/bin/g++",
+                "args": [
+
+                    "-g",
+                    "${file}",   // Current active file while pressing Ctrl+Shift+B
+
+                    // "${workspaceFolder}/app/src/*.cpp", // collect all cpp files in /src dir
+                    "${workspaceFolder}/app/src/includes/*.{cpp,h}", // collect all cpp & header files in /src/includes dir
+
+                    "-o",   // output file name
+                    "${fileDirname}/${fileBasenameNoExtension}",
+                    
+                    "-std=gnu++2a",      // For c++17 use -std=gnu++1z, for C++20 use ‘-std=c++2a’ or ‘-std=gnu++2a’
+                    "-pthread",           // For threaded programming
+                    
+                    // For MATPLOTLIB
+                    "-I",
+                    "/usr/include/python3.8",   // Search for "Python.h" header
+                    "-I",
+                    "~/.local/lib/python3.8/site-packages/numpy/core/include",   // Search for "Python.h" header
+                    "-L",
+                    "/usr/lib/x86_64-linux-gnu",
+                    "-lpython3.8",  // The shared lib -lpython3.8 file's actual name is "libpython3.8.so". And it will be searched in "/usr/lib/x86_64-linux-gnu" dir which is specified by the -L option
+                    "-lpthread",
+                    "-lutil",
+                    "-ldl", // library dependencies
+                    "-Xlinker",
+                    "-export-dynamic"   //export dynamic libraries
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ],
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: g++ for SFML",
+            "linux": {
+                "command": "/usr/bin/g++",
+                "args": [
+
+                    "-g",
+                    "${file}",   // Current active file while pressing Ctrl+Shift+B
+
+                    // // "${workspaceFolder}/app/src/*.cpp", // collect all cpp files in /src dir
+                    // "${workspaceFolder}/app/src/includes/*.{cpp,h}", // collect all cpp & header files in /src/includes dir
+
+                    "-o",   // output file name
+                    "${fileDirname}/${fileBasenameNoExtension}",
+                    
+                    "-std=gnu++2a",      // For c++17 use -std=gnu++1z, for C++20 use ‘-std=c++2a’ or ‘-std=gnu++2a’
+                    "-pthread",           // For threaded programming
+
+                    // FOR SFML
+                    "-I",
+                    "${env:SFML_DIR}/include",   // tell compiler where to find the SFML headers (.hpp files):
+                    "-L",
+                    "${env:SFML_DIR}/lib",
+                    "-lsfml-graphics",    // shared lib -lsfml-graphics file's actual name is "libsfml-graphics.so". And it will be searched in "${env:SFML_DIR}/lib" dir which is specified by the -L option
+                    "-lsfml-window",
+                    "-lsfml-system"
+
+
+                    // // For MATPLOTLIB
+                    // "-I",
+                    // "/usr/include/python3.8",   // Search for "Python.h" header
+                    // "-I",
+                    // "~/.local/lib/python3.8/site-packages/numpy/core/include",   // Search for "Python.h" header
+                    // "-L",
+                    // "/usr/lib/x86_64-linux-gnu",
+                    // "-lpython3.8",  // The shared lib -lpython3.8 file's actual name is "libpython3.8.so". And it will be searched in "/usr/lib/x86_64-linux-gnu" dir which is specified by the -L option
+                    // "-lpthread",
+                    // "-lutil",
+                    // "-ldl", // library dependencies
+                    // "-Xlinker",
+                    // "-export-dynamic"   //export dynamic libraries
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ],
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+        }
+    ]
+}

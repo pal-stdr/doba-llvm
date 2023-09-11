@@ -1,0 +1,68 @@
+{
+    "env": {
+        "myDefaultIncludePath": [
+            "${workspaceFolder}",
+            "${env:LLVM_AND_CLANG_INCLUDE_PATH}"
+        ],
+        "myCompilerPath": "${env:LLVM_AND_CLANG_BIN_PATH}/clang"
+    },
+    "configurations": [
+        {
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64",
+            "includePath": [
+                "${myDefaultIncludePath}",
+                "${workspaceFolder}/src/include"
+            ],
+            "defines": [
+                "FOO",
+                "BAR=100"
+            ],
+            "forcedInclude": [
+                // "${workspaceFolder}/include/config.h"
+            ],
+            "compilerPath": "${env:LLVM_AND_CLANG_BIN_PATH}/clang++",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            // "compileCommands": "${workspaceFolder}/compile_commands.json",    
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "configurationProvider": "ms-vscode.cmake-tools"
+        },
+        {
+            "name": "Mac",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "${myDefaultIncludePath}",
+                "/another/path"
+            ],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks"
+            ],
+            "defines": [
+                "FOO",
+                "BAR=100"
+            ],
+            "forcedInclude": [
+                "${workspaceFolder}/include/config.h"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compileCommands": "/path/to/compile_commands.json",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}
