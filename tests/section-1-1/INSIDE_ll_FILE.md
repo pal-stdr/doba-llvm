@@ -100,6 +100,10 @@ define i32 @main() {
 ```
 clang++ tests/section-1-1/test.ll -o tests/section-1-1/test-minimal-ll-clang-bin; ./tests/section-1-1/test-minimal-ll-clang-bin; echo $?
 
+# or,
+
+lli tests/section-1-1/test.ll; echo $?
+
 # Returns
 warning: overriding the module target triple with x86_64-unknown-linux-gnu [-Woverride-module]
 1 warning generated.
@@ -121,6 +125,11 @@ define i32 @main() {
 Run the command again
 ```
 clang++ tests/section-1-1/test.ll -o tests/section-1-1/test-minimal-ll-clang-bin; ./tests/section-1-1/test-minimal-ll-clang-bin; echo $?
+
+# or,
+
+lli tests/section-1-1/test.ll; echo $?
+
 # Returns
 42
 ```
