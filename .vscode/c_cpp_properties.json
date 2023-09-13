@@ -12,7 +12,7 @@
             "intelliSenseMode": "gcc-x64",
             "includePath": [
                 "${myDefaultIncludePath}",
-                "${workspaceFolder}/src/include"
+                "${workspaceFolder}/src/"
             ],
             "defines": [
                 "FOO",
