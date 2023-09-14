@@ -23,21 +23,7 @@ public:
      * @brief Executes a program
      * This is main API Method
      */
-    void exec(const std::string &program) {
-        // Things to do
-
-        // // 1. Parse the program (generate the AST using Parser)
-        // auto ast = parser->parser(program);
-
-        // // 2. Compile the AST down to LLVM IR
-        // compile(ast)
-
-        // // 3. Print generated IR in the terminal
-        module->print(llvm::outs(), nullptr);
-
-        // // 4. Save module IR to file
-        saveModuleToFile("./out.ll");
-    }
+    void exec(const std::string &program);
 
     ~DobaLLVM(){ };
 
@@ -99,22 +85,46 @@ private:
     /**
      * @brief Saves IR to .ll file
      */
-    void saveModuleToFile(const std::string &fileName) {
-        std::error_code errorCode;
-        llvm::raw_fd_ostream outLL(fileName, errorCode);
-
-        if (!errorCode) {
-            module->print(outLL, nullptr);
-        } else {
-            llvm::errs() << "Error opening file for writing.\n";
-        }
-
-        
-    }
+    void saveModuleToFile(const std::string &fileName);
 
 };
 
 
+
+/**
+ * @brief Executes a program (Private)
+ * This is main API Method
+ */
+void DobaLLVM::exec(const std::string &program) {
+    // Things to do
+
+    // // 1. Parse the program (generate the AST using Parser)
+    // auto ast = parser->parser(program);
+
+    // // 2. Compile the AST down to LLVM IR
+    // compile(ast)
+
+    // // 3. Print generated IR in the terminal
+    module->print(llvm::outs(), nullptr);
+
+    // // 4. Save module IR to file
+    saveModuleToFile("./out.ll");
+}
+
+
+/**
+ * @brief Saves IR to .ll file
+ */
+void DobaLLVM::saveModuleToFile(const std::string &fileName) {
+    std::error_code errorCode;
+    llvm::raw_fd_ostream outLL(fileName, errorCode);
+
+    if (!errorCode) {
+        module->print(outLL, nullptr);
+    } else {
+        llvm::errs() << "Error opening file for writing.\n";
+    }
+}
 
 
 #endif
