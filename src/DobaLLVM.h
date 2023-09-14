@@ -32,7 +32,10 @@ public:
         // // 2. Compile the AST down to LLVM IR
         // compile(ast)
 
-        // // 3. Save module IR to file
+        // // 3. Print generated IR in the terminal
+        module->print(llvm::outs(), nullptr);
+
+        // // 4. Save module IR to file
         saveModuleToFile("./out.ll");
     }
 
