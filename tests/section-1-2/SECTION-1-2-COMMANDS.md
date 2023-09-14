@@ -37,3 +37,9 @@ clang++ dobaLLVMmain.cpp `llvm-config --cxxflags --ldflags --system-libs --libs 
 ; ModuleID = 'DobaLLVM'
 source_filename = "DobaLLVM"
 ```
+
+- Also you can see similar result in the terminal because of following code in `src/DobaLLVM.h`
+```
+// 3. Print generated IR in the terminal
+module->print(llvm::outs(), nullptr);
+```
